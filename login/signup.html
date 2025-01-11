@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MonoGuard - 회원가입</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+</head>
+
+<body>
+    <div class="page-container">
+        <div class="logo-container">
+            <img class="logo" src="logo.svg" alt="MonoGuard Logo">
+        </div>
+        <div class="content">
+            <div class="form-container">
+                <div class="signup-header">
+                    <span class="signup-title">회원가입</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="info-label">이름*</div>
+                    <input class="input-field2" id="name" type="text" placeholder="예) 홍길동" required>
+                </div>
+                
+                <div class="form-row2-container">
+                    <div class="form-row2">
+                        <div class="info-label">사번*</div>
+                        <input class="input-field2" id="employee-id" type="text" placeholder="예) 홍길동" required>
+                    </div>
+                
+                    <div class="form-row2">
+                        <div class="info-label">부서*</div>
+                        <select class="input-field2" id="department" required>
+                            <option value=""disabled selected>부서를 선택하세요</option>
+                            <option value="development">개발팀</option>
+                            <option value="design">디자인팀</option>
+                            <option value="sales">영업팀</option>
+                            <option value="hr">인사팀</option>
+                            <option value="marketing">마케팅팀</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                
+
+                <div class="form-row">
+                    <div class="info-label">전화번호*</div>
+                    <input class="input-field" id="tel" type="int" placeholder="예) 010-1234-5678" required>
+                </div>
+                <div class="form-row">
+                    <div class="info-label">이메일*</div>
+                    <input class="input-field" id="email" type="email" placeholder="예) example@asdf.com" required>
+                </div>
+                <div class="form-row">
+                    <div class="info-label">비밀번호*</div>
+                    <input class="input-field" id="password" type="password" placeholder="비밀번호를 입력하세요" required>
+                </div>
+                <div class="form-row">
+                    <div class="info-label">비밀번호 확인*</div>
+                    <input class="input-field" id="password" type="password" placeholder="비밀번호를 입력하세요" required>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="submit-container" onclick="handleSignUp()">
+                        <span class="submit-text">회원가입</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    function handleSignUp() {
+        // 회원가입 데이터 처리 로직
+        const employeeId = document.getElementById('employee-id')?.value;
+        const name = document.getElementById('name')?.value;
+        const phone = document.getElementById('phone')?.value;
+        const email = document.getElementById('email')?.value;
+        const password = document.getElementById('password')?.value;
+        const confirmPassword = document.getElementById('confirm-password')?.value;
+        const department = document.getElementById('department')?.value;
+
+        if (password !== confirmPassword) {
+            alert('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+            return;
+        }
+
+        // 서버로 데이터 전송 로직 작성 (예: fetch API)
+        console.log({ employeeId, name, phone, email, password, department });
+        alert('회원가입이 완료되었습니다!');
+        window.location.href = 'login.html';
+    }
+</script>
+
+</html>

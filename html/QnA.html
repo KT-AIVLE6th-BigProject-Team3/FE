@@ -34,58 +34,24 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- 메뉴가 동적으로 로드될 영역 -->
+        <div id="menu"></div>
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="logo-container">
-                    <img class="logo" src="../img/logo_white.svg" alt="MonoGuard Logo">
-                </div>
-            </a>
+        <script>
+            // 메뉴를 동적으로 로드
+            fetch('./sidebar.html')  // 경로 확인
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('menu').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading sidebar:', error));
+        </script>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <span class="material-icons sidebor-icon">home</span>
-                    <span>홈페이지</span>
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="predict.html">
-                    <span class="material-icons">visibility</span>
-                    <span>예지보전 예측</span>
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="chat.html">
-                    <span class="material-icons">sms</span>
-                    <span>챗봇</span>
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="notice.html">
-                    <span class="material-icons">info</span>
-                    <span>공지사항</span>
-
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="QnA.html">
-                    <span class="material-icons sidebor-icon">help_center</span>
-                    <span>QnA</span>
-                </a>
-            </li>
-
-        </ul>
-        <!-- 슬라이드바 끝!! -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -93,11 +59,25 @@
             <!-- 메인 콘텐츠 -->
             <div id="content">
 
-                <!-- 헤드 네비 부분 -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- 상단바를 삽입할 영역 -->
+                <div id="topbar"></div>
 
-                </nav>
-                <!-- 헤더 네비 부분 끝!! -->
+                <!-- JavaScript -->
+                <script>
+                    // 상단바를 동적으로 로드
+                    fetch('./topbar.html')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(html => {
+                            document.getElementById('topbar').innerHTML = html;
+                        })
+                        .catch(error => console.error('Error loading topbar:', error));
+                </script>
+                <!-- 상단바 끝! -->
 
                 <!--페이지 콘텐츠 부분-->
                 <!-- Begin Page Content -->

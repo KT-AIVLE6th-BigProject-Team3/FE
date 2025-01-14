@@ -21,48 +21,46 @@
 <body id="page-top">
 
     <div id="wrapper">
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="logo-container">
-                    <img class="logo" src="../img/logo_white.svg" alt="MonoGuard Logo">
-                </div>
-            </a>
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <span class="material-icons sidebor-icon">home</span>
-                    <span>홈페이지</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="predict.html">
-                    <span class="material-icons">visibility</span>
-                    <span>예지보전 예측</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="chat.html">
-                    <span class="material-icons">sms</span>
-                    <span>챗봇</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="notice.html">
-                    <span class="material-icons">info</span>
-                    <span>공지사항</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="QnA.html">
-                    <span class="material-icons sidebor-icon">help_center</span>
-                    <span>QnA</span>
-                </a>
-            </li>
-        </ul>
+        <!-- 메뉴가 동적으로 로드될 영역 -->
+        <div id="menu"></div>
+
+        <script>
+            // 메뉴를 동적으로 로드
+            fetch('./sidebar.html')  // 경로 확인
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('menu').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading sidebar:', error));
+        </script>
+
 
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+                <!-- 상단바를 삽입할 영역 -->
+                <div id="topbar"></div>
+
+                <!-- JavaScript -->
+                <script>
+                    // 상단바를 동적으로 로드
+                    fetch('./topbar.html')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(html => {
+                            document.getElementById('topbar').innerHTML = html;
+                        })
+                        .catch(error => console.error('Error loading topbar:', error));
+                </script>
+                <!-- 상단바 끝! -->
                 <div class="container-fluid">
                     <h1 class="h3 mb-2 text-gray-800 mb-4">공지사항</h1>
                     <div class="card shadow mb-4">

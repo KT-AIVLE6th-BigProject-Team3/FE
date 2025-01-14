@@ -225,6 +225,8 @@ table {
     border-collapse: collapse;
 }
 
+
+
 caption {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
@@ -1784,6 +1786,7 @@ pre code {
     padding: 0.75rem;
     vertical-align: top;
     border-top: 1px solid #e3e6f0;
+    text-align: center;
 }
 
 /* 번호 칼럼 너비 설정 */
@@ -2705,6 +2708,7 @@ textarea.form-control.is-invalid {
 
 
 
+
 @media (prefers-reduced-motion: reduce) {
     .btn {
         transition: none;
@@ -2822,6 +2826,12 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #1cc88a;
     border-color: #1cc88a;
+}
+
+.btn-fail {
+    color: #fff;
+    background-color: #ec2f2f;
+    border-color: #ec2f2f;
 }
 
 .btn-success:hover {
@@ -7160,6 +7170,9 @@ button.bg-dark:hover,
 button.bg-dark:focus {
     background-color: #42444e !important;
 }
+
+
+
 
 .bg-white {
     background-color: #fff !important;
@@ -11781,6 +11794,13 @@ a:focus {
         -webkit-animation: none;
         animation: none;
     }
+    .sidebar-brand .logo {
+        max-width: 80%; /* 부모 요소 대비 100%로 크기 조정 */
+        height: auto; /* 비율 유지 */
+        object-fit: contain; /* 이미지 비율 유지 */
+        display: block; /* 중앙 정렬을 위해 블록 요소로 설정 */
+        margin: 0 auto; /* 가로 중앙 정렬 */
+    }
 
     .sidebar .nav-item .collapse .collapse-inner {
         border-radius: 0;
@@ -11849,13 +11869,7 @@ a:focus {
     }
 
 
-    .sidebar-brand .logo {
-        max-width: 80%;
-        /* 부모 요소 대비 크기 줄임 */
-        height: auto;
-        object-fit: contain;
-        /* 비율 유지 */
-    }
+
 
     .sidebar .sidebar-heading {
         text-align: left;
@@ -12178,6 +12192,8 @@ a:focus {
     .chart-pie {
         height: calc(20rem - 43px) !important;
     }
+
+
 }
 
 .bg-login-image {

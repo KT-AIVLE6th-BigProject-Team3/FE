@@ -128,7 +128,7 @@
                                     <tbody>
                                         <tr>
                                             <td>7</td>
-                                            <td>일곱 번째 공지사항 제목</td>
+                                            <td onclick="moveTopage()" class="clickable">일곱 번째 공지사항 제목</td>
                                             <td>2025-01-07</td>
                                             <td>
                                                 <button class="btn btn-success btn-sm reply-btn">답변 완료</button>
@@ -197,6 +197,10 @@
                     closeModal.addEventListener('click', () => {
                         modal.classList.remove('active');
                     });
+
+                    function moveTopage() {
+                    window.location.href = 'QnA_page.html'; // 이동할 URL
+                }
 
                 </script>
 </body>

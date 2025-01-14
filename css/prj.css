@@ -72,7 +72,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #858796;
+    color: #161719;
     text-align: left;
     background-color: #fff;
 }
@@ -5109,6 +5109,14 @@ input[type="button"].btn-block {
     border-bottom: 1px solid #e3e6f0;
 }
 
+.notice-card-header {
+    padding: 0.75rem 1.25rem;
+    margin-top: .3rem;
+    margin-bottom: .8rem;
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}
+
 .card-header:first-child {
     border-radius: calc(0.35rem - 1px) calc(0.35rem - 1px) 0 0;
 }
@@ -8493,6 +8501,7 @@ button.bg-dark:focus {
     margin: 0 !important;
 }
 
+
 .mt-0,
 .my-0 {
     margin-top: 0 !important;
@@ -10802,7 +10811,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-    color: #4e73df !important;
+    color: #293A91 !important;
 }
 
 a.text-primary:hover,
@@ -12758,4 +12767,21 @@ body.sidebar-toggled footer.sticky-footer {
 
 .account-icon{
     font-size: 2rem;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    text-decoration: underline;
+}
+
+.notice-date{
+    margin-bottom: 0 !important;
+    color: gray
+}
+
+.notice{
+    font-size: 18px;
 }

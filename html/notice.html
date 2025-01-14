@@ -19,13 +19,10 @@
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
     <!--CSS 파일 명시-->
-    <link href="prj.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/prj.css">
 
     <!-- 일반적인 fabicon 설정 -->
-    <link rel="icon" href="fabicon.svg" />
-
-
-
+    <link rel="icon" href="../img/fabicon.svg" />
 
 </head>
 
@@ -40,7 +37,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="logo-container">
-                    <img class="logo" src="logo_white.svg" alt="MonoGuard Logo">
+                    <img class="logo" src="../img/logo_white.svg" alt="MonoGuard Logo">
                 </div>
             </a>
 
@@ -50,7 +47,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
-                    <span class="material-icons sidebor-icon">home</span>
+                    <span class="material-icons sidebor-icon">home </span>
                     <span>홈페이지</span>
                 </a>
             </li>
@@ -104,16 +101,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">QnA</h1>
+                    <h1 class="h3 mb-2 text-gray-800 mb-4">공지사항</h1>
 
-                        <a href="#" id="openModal" class="d-none d-sm-inline-block btn2 btn-sm btn-primary shadow-sm ">
-                            <span class="material-icons">edit</span>
-                            <span>질문하기</span>
-                        </a>
-                    </div>
-
+                    <!-- DataTales Example -->
                     <div class="card shadow mb-4">
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -122,7 +114,6 @@
                                             <th>번호</th>
                                             <th>제목</th>
                                             <th>작성일</th>
-                                            <th>관리</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -130,77 +121,50 @@
                                             <td>7</td>
                                             <td>일곱 번째 공지사항 제목</td>
                                             <td>2025-01-07</td>
-                                            <td>
-                                                <button class="btn btn-success btn-sm reply-btn">답변 완료</button>
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td>6</td>
                                             <td>여섯 번째 공지사항 제목</td>
                                             <td>2025-01-06</td>
-                                            <td>
-                                                <button class="btn btn-success btn-sm reply-btn">답변 완료</button>
-                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>다섯 번째 공지사항 제목</td>
+                                            <td>2025-01-05</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>네 번째 공지사항 제목</td>
+                                            <td>2025-01-04</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>세 번째 공지사항 제목</td>
+                                            <td>2025-01-03</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>두 번째 공지사항 제목</td>
+                                            <td>2025-01-02</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>첫 번째 공지사항 제목</td>
+                                            <td>2025-01-01</td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                
                             </div>
                         </div>
                     </div>
-
-                    <div class="modal" id="qnaModal">
-                        <div class="qna-form-container">
-                            <div class="modal-header justify-content-between">
-                                <h2>질문하기</h2>
-                                <button class="close-btn" id="closeModal">&times;</button>
-                            </div>
-                            <form id="qnaForm">
-                                <div class="form-group">
-                                    <label for="title">*제목</label>
-                                    <input type="text" id="title" name="title" class="form-control"
-                                        placeholder="제목을 입력하세요" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="content">*내용</label>
-                                    <textarea id="content" name="content" class="form-control" rows="5"
-                                        placeholder="질문 내용을 입력하세요" required></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="attachment">첨부파일</label>
-                                    <input type="file" id="attachment" name="attachment"
-                                        class="form-control align-items-center">
-                                </div>
-
-                                <div class="d-sm-flex align-items-center justify-content-between">
-                                    <p></p>
-                                    <button type="submit" class="btn btn-primary">완료</button>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-
-
 
                 </div>
+                <!-- /.container-fluid -->
 
-                <script>
-                    const openModal = document.getElementById('openModal');
-                    const closeModal = document.getElementById('closeModal');
-                    const modal = document.getElementById('qnaModal');
 
-                    openModal.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        modal.classList.add('active');
-                    });
+            </div>
 
-                    closeModal.addEventListener('click', () => {
-                        modal.classList.remove('active');
-                    });
-
-                </script>
 </body>
 
 </html>

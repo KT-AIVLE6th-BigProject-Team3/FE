@@ -10814,6 +10814,10 @@ button.bg-dark:focus {
     color: #293A91 !important;
 }
 
+.text-black {
+    color: #161719 !important;
+}
+
 a.text-primary:hover,
 a.text-primary:focus {
     color: #224abe !important;
@@ -10856,7 +10860,7 @@ a.text-warning:focus {
 }
 
 .text-danger {
-    color: #e74a3b !important;
+    color: #EB483F !important;
 }
 
 a.text-danger:hover,

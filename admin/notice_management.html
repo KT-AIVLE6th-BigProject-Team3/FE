@@ -35,55 +35,46 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- 메뉴가 동적으로 로드될 영역 -->
+        <div id="menu"></div>
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_index.html">
-                <div class="logo-container">
-                    <img class="logo" src="../img/logo_white.svg" alt="MonoGuard Logo">
-                </div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="admin_index.html">
-                    <span class="material-icons sidebor-icon">home </span>
-                    <span>관리자 홈</span>
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="user_management.html">
-                    <span class="material-icons">person</span>
-                    <span>사용자 관리</span>
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="notice_management.html">
-                    <span class="material-icons">info</span>
-                    <span>공지사항 관리</span>
-
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="equipment_management.html">
-                    <span class="material-icons">build</span>
-                    <span>장비 이력 관리</span>
-                </a>
-            </li>
-
-        </ul>
-        <!-- 슬라이드바 끝!! -->
+        <script>
+            // 메뉴를 동적으로 로드
+            fetch('./admin_sidebar.html')  // 경로 확인
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('menu').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading sidebar:', error));
+        </script>
 
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+                <!-- 상단바를 삽입할 영역 -->
+                <div id="topbar"></div>
+
+                <!-- JavaScript -->
+                <script>
+                    // 상단바를 동적으로 로드
+                    fetch('./admin_topbar.html')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(html => {
+                            document.getElementById('topbar').innerHTML = html;
+                        })
+                        .catch(error => console.error('Error loading topbar:', error));
+                </script>
+                <!-- 상단바 끝! -->
+
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">공지사항</h1>
@@ -150,20 +141,19 @@
                 <form id="qnaForm">
                     <div class="form-group">
                         <label for="title">*제목</label>
-                        <input type="text" id="title" name="title" class="form-control"
-                            placeholder="제목을 입력하세요" required>
+                        <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요"
+                            required>
                     </div>
 
                     <div class="form-group">
                         <label for="content">*내용</label>
-                        <textarea id="content" name="content" class="form-control" rows="5"
-                            placeholder="질문 내용을 입력하세요" required></textarea>
+                        <textarea id="content" name="content" class="form-control" rows="5" placeholder="질문 내용을 입력하세요"
+                            required></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="attachment">첨부파일</label>
-                        <input type="file" id="attachment" name="attachment"
-                            class="form-control align-items-center">
+                        <input type="file" id="attachment" name="attachment" class="form-control align-items-center">
                     </div>
 
                     <div class="d-sm-flex align-items-center justify-content-between">
@@ -191,8 +181,8 @@
         });
 
         function moveTopage() {
-        window.location.href = 'QnA_page.html'; // 이동할 URL
-    }
+            window.location.href = 'QnA_page.html'; // 이동할 URL
+        }
 
     </script>
 </body>

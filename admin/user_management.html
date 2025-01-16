@@ -35,51 +35,23 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- 메뉴가 동적으로 로드될 영역 -->
+        <div id="menu"></div>
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_index.html">
-                <div class="logo-container">
-                    <img class="logo" src="../img/logo_white.svg" alt="MonoGuard Logo">
-                </div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="admin_index.html">
-                    <span class="material-icons sidebor-icon">home </span>
-                    <span>관리자 홈</span>
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="user_management.html">
-                    <span class="material-icons">person</span>                    
-                    <span>사용자 관리</span>
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="notice_management.html">
-                    <span class="material-icons">info</span>
-                    <span>공지사항 관리</span>
-
-                </a>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="equipment_management.html">
-                    <span class="material-icons">build</span>                    
-                    <span>장비 이력 관리</span>
-                </a>
-            </li>
-
-        </ul>
-        <!-- 슬라이드바 끝!! -->
+        <script>
+            // 메뉴를 동적으로 로드
+            fetch('./admin_sidebar.html')  // 경로 확인
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('menu').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading sidebar:', error));
+        </script>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -87,74 +59,25 @@
             <!-- 메인 콘텐츠 -->
             <div id="content">
 
-                <!-- 헤드 네비 부분 -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- 상단바를 삽입할 영역 -->
+                <div id="topbar"></div>
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </form>
-
-
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">사번</span>
-                                <span class="material-icons account-icon">account_circle</span>                           
-                             </a>
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- 헤더 네비 부분 끝!! -->
+                <!-- JavaScript -->
+                <script>
+                    // 상단바를 동적으로 로드
+                    fetch('./admin_topbar.html')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(html => {
+                            document.getElementById('topbar').innerHTML = html;
+                        })
+                        .catch(error => console.error('Error loading topbar:', error));
+                </script>
+                <!-- 상단바 끝! -->
 
                 <!--페이지 콘텐츠 부분-->
                 <div class="container-fluid">
@@ -216,7 +139,7 @@
                         </div>
                     </div>
 
-            </div>
+                </div>
 
 </body>
 

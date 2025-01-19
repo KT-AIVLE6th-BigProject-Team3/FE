@@ -11064,6 +11064,8 @@ a:focus {
 
 #wrapper {
     display: flex;
+    min-height: 100%;
+
 }
 
 #wrapper #content-wrapper {
@@ -11178,6 +11180,7 @@ a:focus {
 .bg-gradient-primary {
     background-color: #293A91;
     background-size: cover;
+
 }
 
 .bg-gradient-secondary {
@@ -11602,6 +11605,8 @@ a:focus {
 .sidebar {
     width: 6.5rem;
     min-height: 100vh;
+    height: auto; /* 콘텐츠 길이에 따라 높이 조정 */
+
 }
 
 .sidebar .nav-item {

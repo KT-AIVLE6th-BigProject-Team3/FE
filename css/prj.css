@@ -12812,3 +12812,35 @@ body.sidebar-toggled footer.sticky-footer {
 .notice{
     font-size: 18px;
 }
+
+.notice-navigation {
+    border-top: 1px solid #e3e6f0;
+    margin:1rem 2rem 1rem;
+}
+
+.notice-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.nav-arrow {
+    color: #858796;
+    margin-right: 15px;
+}
+
+.nav-label {
+    color: #858796;
+    width: 60px;
+    margin-right: 15px;
+}
+
+.nav-title {
+    color: #444;
+    text-decoration: none;
+}
+
+.nav-title:hover {
+    text-decoration: underline;
+}

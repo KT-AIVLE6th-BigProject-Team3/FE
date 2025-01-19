@@ -1,148 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="QnA">
-    <meta name="author" content="황은비">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="QnA" />
+    <meta name="author" content="황은비" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 
     <title>MonoGuard</title>
 
-    <!--아이콘이랑 폰트가져오기-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" as="style" crossorigin
-        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-
-    <!--CSS 파일 명시-->
-    <link rel="stylesheet" href="../css/prj.css">
-
-    <!-- 일반적인 fabicon 설정 -->
+    <!-- 외부 CSS 및 아이콘 폰트 -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="../css/prj.css" />
     <link rel="icon" href="../img/fabicon.svg" />
 
-</head>
+    <!-- 탭 스타일 정의 -->
+    <style>
+      .tab-content {
+        display: none; /* 기본적으로 탭 콘텐츠는 숨김 */
+      }
+      .tab-content.active {
+        display: block; /* 활성화된 탭 콘텐츠만 표시 */
+      }
+      .tab-buttons {
+        margin-bottom: 20px; /* 탭 버튼과 콘텐츠 간격 설정 */
+      }
+      .tab-btn {
+        padding: 10px 20px;
+        margin-right: 10px;
+        border: none;
+        background-color: #f8f9fc; /* 기본 배경색 */
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .tab-btn.active {
+        background-color: #4e73df; /* 활성화된 탭 배경색 */
+        color: white;
+      }
+    </style>
+  </head>
 
-<body id="page-top">
-
-    <!-- Page Wrapper -->
+  <body id="page-top">
     <div id="wrapper">
-        <!-- 메뉴가 동적으로 로드될 영역 -->
-        <div id="menu"></div>
+      <!-- 메뉴 영역 (사이드바) -->
+      <div id="menu"></div>
 
-        <script>
-            // 메뉴를 동적으로 로드
-            fetch('./sidebar.html')  // 경로 확인
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    document.getElementById('menu').innerHTML = html;
-                })
-                .catch(error => console.error('Error loading sidebar:', error));
-        </script>
+      <!-- 메인 콘텐츠 영역 -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <!-- 상단바 영역 -->
+          <div id="topbar"></div>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- 메인 콘텐츠 -->
-            <div id="content">
-
-                <!-- 상단바를 삽입할 영역 -->
-                <div id="topbar"></div>
-
-                <!-- JavaScript -->
-                <script>
-                    // 상단바를 동적으로 로드
-                    fetch('./topbar.html')
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok ' + response.statusText);
-                            }
-                            return response.text();
-                        })
-                        .then(html => {
-                            document.getElementById('topbar').innerHTML = html;
-                        })
-                        .catch(error => console.error('Error loading topbar:', error));
-                </script>
-                <!-- 상단바 끝! -->
-
-
-                <!--페이지 콘텐츠 부분-->
-                <div class="container-fluid">
-
-                    <!-- 페이지 헤딩-->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">전체보기</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
-
-
-                    <div class="row">
-
-                        <!-- 콘텐츠-->
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- 장비현황-->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">장비현황</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>장비현황 어쩌구 어쩌구</p>
-                                    <p>장비현황 어쩌구 어쩌구</p>
-                                    <p>장비현황 어쩌구 어쩌구</p>
-                                    <p>장비현황 어쩌구 어쩌구</p>
-                                    <p>장비현황 어쩌구 어쩌구</p>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-                            <!-- 장비현황 -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">장비현황</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>장비현황 어쩌구 어쩌구</p>
-                                </div>
-                            </div>
-                            <!-- 공지사항 -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>공지사항 어쩌구</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-
-
+          <!-- 페이지 콘텐츠 -->
+          <div class="container-fluid">
+            <!-- 페이지 제목 -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-3">
+              <h1 class="h3 mb-0 text-gray-800">대시보드</h1>
             </div>
 
-</body>
+            <!-- 탭 버튼 영역 -->
+            <div class="tab-buttons">
+              <button class="tab-btn active" onclick="showTab('avg')">AVG</button>
+              <button class="tab-btn" onclick="showTab('oht')">OHT</button>
+            </div>
 
+            <!-- AVG 탭 콘텐츠 -->
+            <div id="avg-tab" class="tab-content active">
+              <!-- AVG 콘텐츠 -->
+              <div class="row">
+                <!-- 좌측 콘텐츠 -->
+                <div class="col-lg-7 mb-3">
+                  <!-- 최근 작업 환경 -->
+                  <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">최근 작업 환경</h6>
+                    </div>
+                    <div class="agv-env-card-body">
+                      <iframe src="http://localhost:8501" width="100%" height="110" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                  <!-- 작업현장 온도 변화 -->
+                  <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">작업현장 온도 변화</h6>
+                    </div>
+                    <div class="agv-env-card-body">
+                      <iframe src="http://localhost:8502" width="100%" height="315" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                  <!-- 작업현장 습도 변화 -->
+                  <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">작업현장 습도 변화</h6>
+                    </div>
+                    <div class="agv-env-card-body">
+                      <iframe src="http://localhost:8503" width="100%" height="315" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                  <!-- 작업현장 조도 변화 -->
+                  <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">작업현장 조도 변화</h6>
+                    </div>
+                    <div class="agv-env-card-body">
+                      <iframe src="http://localhost:8504" width="100%" height="315" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 우측 콘텐츠 -->
+                <div class="col-lg-5 mb-3">
+                  <!-- 기기 현황 -->
+                  <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">최근 작업 환경</h6>
+                    </div>
+                    <div class="agv-env-card-body">
+                      <iframe src="" width="100%" height="510" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                  <!-- 작업현장 온도 변화 -->
+                  <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">작업현장 온도 변화</h6>
+                    </div>
+                    <div class="agv-env-card-body">
+                      <iframe src="http://localhost:8502" width="100%" height="315" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                  <!-- 작업현장 습도 변화 -->
+                  <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                      <h6 class="m-0 font-weight-bold text-primary">작업현장 습도 변화</h6>
+                    </div>
+                    <div class="agv-env-card-body">
+                      <iframe src="http://localhost:8502" width="100%" height="315" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- OHT 탭 콘텐츠 -->
+            <div id="oht-tab" class="tab-content">
+              <!-- OHT 콘텐츠 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 탭 전환을 위한 JavaScript -->
+    <script>
+      // 메뉴와 상단바 로드
+      fetch("./sidebar.html")
+        .then((response) => response.text())
+        .then((html) => (document.getElementById("menu").innerHTML = html))
+        .catch((error) => console.error("Error loading sidebar:", error));
+
+      fetch("./topbar.html")
+        .then((response) => response.text())
+        .then((html) => (document.getElementById("topbar").innerHTML = html))
+        .catch((error) => console.error("Error loading topbar:", error));
+
+      // 탭 전환 함수
+      function showTab(tabName) {
+        // 모든 탭 콘텐츠 숨기기
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
+        });
+        // 모든 탭 버튼 비활성화
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // 선택된 탭 콘텐츠와 버튼 활성화
+        document.getElementById(tabName + "-tab").classList.add("active");
+        document.querySelector(`button[onclick="showTab('${tabName}')"]`).classList.add("active");
+      }
+    </script>
+  </body>
 </html>

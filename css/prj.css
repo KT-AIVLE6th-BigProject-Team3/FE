@@ -5088,7 +5088,13 @@ input[type="button"].btn-block {
 .card-body {
     flex: 1 1 auto;
     min-height: 1px;
-    padding: 1.25rem;
+    padding: 1.5rem 1.5rem 1rem; /* 위아래 0rem, 좌우 1rem */
+}
+
+.agv-env-card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0rem 1.5rem .5rem; /* 위아래 0rem, 좌우 1rem */
 }
 
 .card-title {
@@ -11619,6 +11625,7 @@ a:focus {
 
 .sidebar .nav-item.active .nav-link {
     font-weight: 700;
+    margin: .5rem 0rem .5rem;
 }
 
 .sidebar .nav-item .collapse {
@@ -11827,7 +11834,7 @@ a:focus {
         /* 필요 시 유지 */
         text-align: left;
         /* 텍스트 정렬 */
-        padding: 1.8rem 1rem 0rem;
+        padding: .4rem 1rem .4rem;
     }
 
     .sidebar .nav-item .nav-link i {

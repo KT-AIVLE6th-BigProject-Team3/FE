@@ -5125,10 +5125,6 @@ input[type="button"].btn-block {
     color: #293A91;
 }
 
-.equipment-item:hover {
-    background-color: #eaefff;
-}
-
 .card-title {
     margin-bottom: 0.75rem;
 }
@@ -5163,6 +5159,8 @@ input[type="button"].btn-block {
     margin-bottom: .8rem;
     background-color: #f8f9fc;
     border-bottom: 1px solid #e3e6f0;
+    border-radius: calc(0.35rem - 1px) calc(0.35rem - 1px) 0 0;
+
 }
 
 .card-header:first-child {
@@ -13000,7 +12998,6 @@ tab-content {
 }
 
 
-
 /* 탭 콘텐츠 */  
 .tab-content {
     display: none;
@@ -13012,3 +13009,84 @@ tab-content {
     display: block; 
     opacity: 1;
 }
+
+      /* 기본 디테일 스타일 */
+      .detail-stats {
+        margin-bottom: 1.5rem;
+      }
+
+      /* 장비 리스트 관련 스타일 */
+      .equipment-list {
+        background-color: #fff;
+        border-radius: 0.35rem;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        margin-bottom: 1rem;
+      }
+
+      .equipment-item {
+        padding: 1rem;
+        border-bottom: 1px solid #e3e6f0;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .equipment-item:last-child {
+        border-bottom: none;
+      }
+
+      .equipment-name {
+        font-weight: 500;
+      }
+
+      /* 상태 표시 관련 스타일 */
+      .equipment-status {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.2rem;
+        background-color: white;
+      }
+      
+      /* 센서 그리드 관련 스타일 */
+      .sensor-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .sensor-item {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 0.35rem;
+        border: 1px solid #e3e6f0;
+        text-align: center;
+      }
+
+      .sensor-label {
+        color: #858796;
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+      }
+
+      .sensor-value {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin: 0.5rem 0;
+        color: #5a5c69;
+      }
+
+      /* 트렌드 표시 관련 스타일 */
+      .trend-indicator {
+        font-size: 0.8rem;
+      }
+
+      .trend-up {
+        color: #e74a3b;
+      }
+      .trend-down {
+        color: #1cc88a;
+      }

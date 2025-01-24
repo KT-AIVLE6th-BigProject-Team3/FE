@@ -266,7 +266,7 @@ def create_ai_equipment_report(장비_ID, 시작_날짜, 종료_날짜, equipmen
 # ✅ 1️⃣ PDF 보고서 생성
 def generate_pdf_equipment_report(장비_ID, 시작_날짜, 종료_날짜, equipment_data, report_text):
     pdf_filename = f"{장비_ID}_정비보고서.pdf"
-    pdf_path = os.path.join(REPORTS_DIR, pdf_filename)  # ✅ `reports/` 폴더에 저장
+    pdf_path = os.path.join(REPORTS_DIR, pdf_filename)  
 
     html_content = f"""
     <html>
@@ -286,29 +286,61 @@ def generate_pdf_equipment_report(장비_ID, 시작_날짜, 종료_날짜, equip
     </html>
     """
 
-    pdfkit.from_string(html_content, pdf_path, configuration=PDFKIT_CONFIG)
-    print(f"✅ PDF 보고서 생성 완료: {pdf_path}")  # 디버깅용 로그 추가
-    return pdf_path
+    try:
+        pdfkit.from_string(html_content, pdf_path, configuration=PDFKIT_CONFIG)
+        print(f"✅ PDF 보고서 생성 완료: {pdf_path}")  # << 디버깅용 로그 추가
+    except Exception as e:
+        print(f"❌ PDF 생성 실패: {e}")  # << PDF 생성 실패 로그 추가
+        return None
+
+    return pdf_filename  # << 경로가 아닌 파일명만 반환
+
 
 from fastapi.responses import FileResponse
 import os
 
-# ✅ 장비 보고서 생성 후 PDF 생성하지 않고 `download-report` 엔드포인트에서 생성
 @app.post("/generate-equipment-report")
 async def generate_equipment_report(request: EquipmentReportRequest):
     try:
+        # ✅ 장비 데이터 조회
         equipment_data = fetch_equipment_data(request.장비_ID, request.시작_날짜, request.종료_날짜)
+
+        # ✅ AI 기반 보고서 생성
         report_text = create_ai_equipment_report(request.장비_ID, request.시작_날짜, request.종료_날짜, equipment_data)
+
+        # ✅ PDF 보고서 생성
         pdf_filename = generate_pdf_equipment_report(request.장비_ID, request.시작_날짜, request.종료_날짜, equipment_data, report_text)
-        return {"message": "보고서 생성 완료", "pdf_filename": pdf_filename}
+
+        # 🔥 PDF 생성 실패 방지 코드 추가
+        if not pdf_filename:
+            raise HTTPException(status_code=500, detail="PDF 파일 생성 실패!")
+
+        # ✅ 다운로드 URL 생성
+        download_url = f"http://localhost:8000/download-report/{pdf_filename}"
+        print(f"✅ PDF 보고서 생성 완료: reports/{pdf_filename}")
+        print(f"🔗 다운로드 URL 생성 완료: {download_url}")
+
+        # ✅ 정상적으로 생성된 경우 JSON 응답 반환
+        return {
+            "message": "보고서 생성 완료",
+            "pdf_filename": pdf_filename,
+            "download_url": download_url
+        }
+
     except Exception as e:
+        print(f"❌ 오류 발생: {str(e)}")
         return {"error": str(e)}
 
-# ✅ 사용자가 다운로드 버튼을 클릭할 때 PDF를 생성하고 반환
-# ✅ 파일이 존재하면 반환, 없으면 에러 메시지 출력
+
+
+
+# ✅ 보고서 다운로드 엔드포인트
 @app.get("/download-report/{filename}")
 async def download_report(filename: str):
-    file_path = os.path.join(REPORTS_DIR, filename)
+    reports_dir = "reports"  # 보고서 파일이 저장된 폴더
+    file_path = os.path.join(reports_dir, filename)
+
     if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="파일을 찾을 수 없습니다.")
-    return FileResponse(file_path, media_type='application/pdf', filename=filename)
+        return {"error": "파일을 찾을 수 없습니다."}
+
+    return FileResponse(file_path, filename=filename, media_type="application/pdf")

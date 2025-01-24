@@ -122,6 +122,7 @@
                                 <input type="text" id="end-date" class="form-control" placeholder="종료 날짜 (MM-DD)">
                                 <button id="report-button" class="btn btn-success">보고서 생성</button>
                             </div>
+
                             <div id="report-response" style="margin-top: 10px;"></div>
                         </div>
                     </div>
@@ -145,6 +146,16 @@
 
                 </div>
             </div>
+
+            <!-- 📌 보고서 응답 표시 영역 -->
+            <div id="report-response" style="margin-top: 10px;"></div>
+
+            <a id="download-url" class="btn btn-success" style="display: none;" download>📥 다운로드</a>
+
+
+
+            
+
 
             <script>
                 const chatMessages = document.getElementById('chat-messages');
@@ -186,14 +197,15 @@
                 });
 
 
-                // 📌 보고서 생성 기능 추가 (버튼 클릭 이벤트)
                 document.getElementById('report-button').addEventListener('click', async function() {
                     const deviceId = document.getElementById("device-id").value.trim();
                     const startDate = document.getElementById("start-date").value.trim();
                     const endDate = document.getElementById("end-date").value.trim();
+                    const reportResponse = document.getElementById("report-response");
+                    const downloadButton = document.getElementById("download-url");
                 
                     if (!deviceId || !startDate || !endDate) {
-                        document.getElementById("report-response").innerHTML = `<p style="color: red;">❌ 모든 필드를 입력하세요.</p>`;
+                        reportResponse.innerHTML = `<p style="color: red;">❌ 모든 필드를 입력하세요.</p>`;
                         return;
                     }
                 
@@ -204,6 +216,7 @@
                     };
                 
                     try {
+                        // ✅ 서버에 보고서 생성 요청
                         const response = await fetch("http://localhost:8000/generate-equipment-report", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
@@ -211,50 +224,51 @@
                         });
                 
                         const data = await response.json();
+                        console.log("✅ API 응답:", data);
                 
-                        if (data.pdf_filename) {
-                            // ✅ 다운로드 버튼 표시
-                            document.getElementById("report-response").innerHTML = `
-                                <p>✅ 보고서 생성 완료!</p>
-                                <button class="btn btn-success" id="download-button">📥 보고서 다운로드</button>
-                            `;
-                
-                            // ✅ 다운로드 버튼 클릭 이벤트 추가
-                            document.getElementById("download-button").addEventListener("click", async function() {
-                                const downloadResponse = await fetch(`http://localhost:8000/download-report/${data.pdf_filename}`);
-                
-                                if (downloadResponse.ok) {
-                                    const blob = await downloadResponse.blob();
-                                    const downloadUrl = window.URL.createObjectURL(blob);
-                                    const a = document.createElement("a");
-                                    a.href = downloadUrl;
-                                    a.download = data.pdf_filename;
-                                    document.body.appendChild(a);
-                                    a.click();
-                                    document.body.removeChild(a);
-                
-                                    // ✅ 다운로드 완료 메시지 표시
-                                    document.getElementById("report-response").innerHTML = `
-                                        <p>✅ <strong>${data.pdf_filename}</strong> 파일이 다운로드되었습니다.</p>
-                                    `;
-                                } else {
-                                    throw new Error("파일 다운로드 실패");
-                                }
-                            });
-                
-                        } else {
-                            throw new Error(data.error || "알 수 없는 오류 발생");
+                        if (!response.ok || !data.download_url) {
+                            throw new Error(data.error || "다운로드 URL이 생성되지 않았습니다.");
                         }
+                
+                        // ✅ 성공 메시지 표시
+                        reportResponse.innerHTML = `<p>✅ 보고서 생성 완료! 다운로드 가능:</p>`;
+                
+                        // ✅ 다운로드 버튼 설정
+                        downloadButton.href = data.download_url;
+                        downloadButton.style.display = "inline-block";
+                        downloadButton.innerText = `📥 ${data.pdf_filename} 다운로드`;
+                
+                        console.log("✅ 다운로드 버튼 활성화 완료:", data.download_url);
+                
                     } catch (error) {
                         console.error("보고서 생성 오류:", error);
-                        document.getElementById("report-response").innerHTML = `<p style="color: red;">❌ 오류 발생: ${error.message}</p>`;
+                        reportResponse.innerHTML = `<p style="color: red;">❌ 오류 발생: ${error.message}</p>`;
                     }
                 });
+                
+                // 📌 다운로드 버튼 클릭 시 동작 (버튼이 활성화된 후 실행)
+                document.getElementById('download-url').addEventListener('click', function(event) {
+                    const downloadUrl = this.href;
+                
+                    if (!downloadUrl || downloadUrl === "#") {
+                        alert("❌ 다운로드할 파일이 없습니다. 먼저 보고서를 생성하세요.");
+                        event.preventDefault(); // 기본 동작 방지
+                        return;
+                    }
+                
+                    // ✅ 자동 다운로드 실행
+                    const a = document.createElement('a');
+                    a.href = downloadUrl;
+                    a.setAttribute('download', '');
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                
+                    console.log("✅ 다운로드 시작:", downloadUrl);
+                });
+                
 
-
-                
-                
-                
             </script>
 
 </body>
